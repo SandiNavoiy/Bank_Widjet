@@ -1,6 +1,6 @@
 import json
-def load_professions():
-    """ функция загружает список проффессий из файла"""
+def load_file():
+    """ функция преобразовывает файл json  в формат Python"""
     new_lines = []
     with open("operations.json", 'r', encoding='utf-8') as f:
         data = json.loads(f.read())
@@ -8,5 +8,7 @@ def load_professions():
 
         return data
 
+#print(load_file())
 
-print(load_professions())
+for i in load_file():
+    print(i)
