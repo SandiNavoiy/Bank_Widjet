@@ -29,5 +29,6 @@ for i in range(6):
          state = transaction["state"]
 
          print(f'{date} {id} {state}')
+         print()
 
 
