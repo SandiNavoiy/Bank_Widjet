@@ -14,7 +14,7 @@ def datatime(text):
     return f"{datetime_object.day}.{datetime_object.month}.{datetime_object.year}"
 
 def sorting_from_empty(list_from_file):
-    """сортировка по id и удаление пустого значения"""
+    """ удаление пустых значений и не выполненых операций"""
     list_from_file_new = []
     for i in list_from_file:
         # Если имя текущего элемента равно 'Alice', добавляем его в новый список
@@ -28,21 +28,18 @@ def sorting_from_data(list_from_file):
     list_from_file.sort(key=lambda x: x['date'], reverse=True)
     return list_from_file
 
-data = sorting_from_data(sorting_from_empty(load_file("operations.json")))
+data_transaction = sorting_from_data(sorting_from_empty(load_file("operations.json")))
 
 
 print("Последние 5  проведенных операций по Вашей карте:")
 
 for i in range(5):
-     transaction = data[i]
-     if "CANCELED" in transaction["state"]:
-         continue
-     else:
-         date = transaction["date"]
-         id = transaction["id"]
-         state = transaction["state"]
+     transaction = data_transaction[i]
 
-         print(f'{datatime(date)} {id} {state}')
+     print(f'{datatime(transaction["date"])} {transaction["description"]} ')
+     print(f'{transaction["to"]} -> {transaction["to"]}')
+     print(f'{transaction["operationAmount"]["amount"]} {transaction["operationAmount"]["currency"]["name"]} ')
+     print("-------------")
 
 #8.12.2019 863064926 EXECUTED
 #7.12.2019 114832369 EXECUTED
