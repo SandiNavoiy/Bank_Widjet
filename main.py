@@ -37,25 +37,29 @@ data_transaction = sorting_from_data(sorting_from_empty(load_file("operations.js
 
 def mask_account_number(account_number):
     """функция маскировки номера"""
-    account_number_new = account_number["to"]
-    if "Счет" in account_number_new:
-        return account_number_new[0:len(account_number_new) - 20] + '**' + account_number_new[-4:]
+    new = account_number["to"]
+    len_s = len(new)
+    if "Счет" in new:
+        return new[0:len_s - 20] + '**' + new[-4:]
     else:
-        return account_number_new[0:len(account_number_new) - 16] + '**' + account_number_new[-4:]
+        return new[0:len_s - 12] + ' ' + new[len_s - 13:len_s - 11] + '** **** ' +  new[-4:]
 
 
 def input_to(account_to):
     """функция вывода с какой карты или счета идет перевод"""
     if "from" in account_to:
-        return account_to['from']
+        new = account_to['from']
+        len_s = len(new)
+        if "Счет" in new:
+            return new[0:len_s - 20] + '**' + new[-4:]
+        else:
+            return new[0:len_s - 12] + ' ' + new[len_s - 13:len_s - 11] + '** **** ' + new[-4:]
     else:
-        return "вклад открыт"
+        return "Выполнен перевод на счет вклада"
 
 
 print("Последние 5  проведенных операций по Вашей карте:")
 print("-------------")
-
-
 for i in range(5):
      transaction = data_transaction[i]
      print(f'{datatime(transaction["date"])} {transaction["description"]} ')
