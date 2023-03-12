@@ -15,9 +15,13 @@ def datatime(text):
 
 def sorting_from_empty(list_from_file):
     """сортировка по id и удаление пустого значения"""
-    list_from_file.sort(key=lambda x: x.get('id', 0))
-    list_from_file.pop(0)
-    return list_from_file
+    list_from_file_new = []
+    for i in list_from_file:
+        # Если имя текущего элемента равно 'Alice', добавляем его в новый список
+        if i.get('state') == 'EXECUTED':
+            list_from_file_new.append(i)
+
+    return list_from_file_new
 
 def sorting_from_data(list_from_file):
     """сортировка по дате"""
@@ -29,7 +33,7 @@ data = sorting_from_data(sorting_from_empty(load_file("operations.json")))
 
 print("Последние 5  проведенных операций по Вашей карте:")
 
-for i in range(6):
+for i in range(5):
      transaction = data[i]
      if "CANCELED" in transaction["state"]:
          continue
