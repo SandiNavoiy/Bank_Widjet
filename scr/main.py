@@ -48,7 +48,7 @@ def mask_account_number(account_number):
 
 def input_to(account_to):
     """функция вывода с какой карты или счета идет перевод"""
-    if "from" in accountcd_to:
+    if "from" in account_to:
         new = account_to['from']
         len_s = len(new)
         if "Счет" in new:
