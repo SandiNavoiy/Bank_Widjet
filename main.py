@@ -32,6 +32,7 @@ def sorting_from_data(list_from_file):
     list_from_file.sort(key=lambda x: x['date'], reverse=True)
     return list_from_file
 
+
 data_transaction = sorting_from_data(sorting_from_empty(load_file("operations.json")))
 
 
@@ -42,7 +43,7 @@ def mask_account_number(account_number):
     if "Счет" in new:
         return new[0:len_s - 20] + '**' + new[-4:]
     else:
-        return new[0:len_s - 12] + ' ' + new[len_s - 13:len_s - 11] + '** **** ' +  new[-4:]
+        return new[0:len_s - 12] + ' ' + new[len_s - 13:len_s - 11] + '** **** ' + new[-4:]
 
 
 def input_to(account_to):
@@ -61,15 +62,14 @@ def input_to(account_to):
 print("Последние 5  проведенных операций по Вашей карте:")
 print("-------------")
 for i in range(5):
-     transaction = data_transaction[i]
-     print(f'{datatime(transaction["date"])} {transaction["description"]} ')
-     print(f'{input_to(transaction)} -> {mask_account_number(transaction)}')
-     print(f'{transaction["operationAmount"]["amount"]} {transaction["operationAmount"]["currency"]["name"]} ')
-     print("-------------")
+    transaction = data_transaction[i]
+    print(f'{datatime(transaction["date"])} {transaction["description"]} ')
+    print(f'{input_to(transaction)} -> {mask_account_number(transaction)}')
+    print(f'{transaction["operationAmount"]["amount"]} {transaction["operationAmount"]["currency"]["name"]} ')
+    print("-------------")
 
-#8.12.2019 863064926 EXECUTED
-#7.12.2019 114832369 EXECUTED
-#19.11.2019 154927927 EXECUTED
-#13.11.2019 482520625 EXECUTED
-#5.11.2019 801684332 EXECUTED
-
+# 8.12.2019 863064926 EXECUTED
+# 7.12.2019 114832369 EXECUTED
+# 19.11.2019 154927927 EXECUTED
+# 13.11.2019 482520625 EXECUTED
+# 5.11.2019 801684332 EXECUTED
