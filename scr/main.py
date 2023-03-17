@@ -33,9 +33,6 @@ def sorting_from_data(list_from_file):
     return list_from_file
 
 
-data_transaction = sorting_from_data(sorting_from_empty(load_file("operations.json")))
-
-
 def mask_account_number(account_number):
     """функция маскировки номера"""
     new = account_number["to"]
@@ -59,6 +56,7 @@ def input_to(account_to):
         return "Выполнен перевод на счет вклада"
 
 
+data_transaction = sorting_from_data(sorting_from_empty(load_file("operations.json")))
 print("Последние 5  проведенных операций по Вашей карте:")
 print("-------------")
 for i in range(5):
