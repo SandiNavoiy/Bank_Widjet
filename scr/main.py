@@ -1,20 +1,14 @@
-from finc import input_to
-from finc import mask_account_number
-from finc import datatime
-from finc import sorting_from_empty
-from finc import load_file
-from finc import sorting_from_data
+from finc import sorting_from_empty, load_file, sorting_from_data, print_to_sum, print_from_to, \
+    print_date_description
 
-
-data_transaction = sorting_from_data(sorting_from_empty(load_file("operations.json")))
 print("Последние 5  проведенных операций по Вашей карте:")
 
 for i in range(5):
-    transaction = data_transaction[i]
-    print(f'{datatime(transaction["date"])} {transaction["description"]} ')
-    print(f'{input_to(transaction)} -> {mask_account_number(transaction)}')
-    print(f'{transaction["operationAmount"]["amount"]} {transaction["operationAmount"]["currency"]["name"]} ')
-
+    transaction = sorting_from_data(sorting_from_empty(load_file("operations.json")))[i]
+    print(f"{print_date_description(transaction)} \n"
+          f"{print_from_to(transaction)} \n"
+          f"{print_to_sum(transaction)}\n"
+          f"_____________________")
 
 # 8.12.2019 863064926 EXECUTED
 # 7.12.2019 114832369 EXECUTED

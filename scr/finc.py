@@ -1,6 +1,7 @@
 import json
 from datetime import datetime
 
+
 def mask_account_number(account_number):
     """функция маскировки номера"""
     new = account_number["to"]
@@ -9,6 +10,7 @@ def mask_account_number(account_number):
         return new[0:len_s - 20] + '**' + new[-4:]
     else:
         return new[0:len_s - 12] + ' ' + new[len_s - 13:len_s - 11] + '** **** ' + new[-4:]
+
 
 def input_to(account_to):
     """функция вывода с какой карты или счета идет перевод"""
@@ -21,6 +23,7 @@ def input_to(account_to):
             return new[0:len_s - 12] + ' ' + new[len_s - 13:len_s - 11] + '** **** ' + new[-4:]
     else:
         return "Выполнен перевод на счет вклада"
+
 
 def datatime(text):
     """функция преодразования строки к виду число-месяц-год"""
@@ -38,6 +41,7 @@ def sorting_from_empty(list_from_file):
 
     return list_from_file_new
 
+
 def load_file(file_of_json):
     """ функция преобразовывает файл json  в формат Python"""
     with open(file_of_json, 'r', encoding='utf-8') as f:
@@ -45,7 +49,23 @@ def load_file(file_of_json):
 
         return data_new
 
+
 def sorting_from_data(list_from_file):
     """сортировка по дате"""
     list_from_file.sort(key=lambda x: x['date'], reverse=True)
     return list_from_file
+
+
+def print_to_sum(sorting_dict):
+    """функция печати суммы операции и валюты"""
+    return f'{sorting_dict["operationAmount"]["amount"]} {sorting_dict["operationAmount"]["currency"]["name"]}'
+
+
+def print_from_to(sorting_dict):
+    """функция печати  с какого счета/карты на какою счет/карту идет перевод"""
+    return f'{input_to(sorting_dict)} -> {mask_account_number(sorting_dict)}'
+
+
+def print_date_description(sorting_dict):
+    """функция печати  даты и описания операции"""
+    return f'{datatime(sorting_dict["date"])} {sorting_dict["description"]}'
